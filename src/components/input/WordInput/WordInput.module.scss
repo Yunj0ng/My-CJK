@@ -1,0 +1,31 @@
+@import '@styles/_mixins.scss';
+
+.container {
+	@include inputContainer;
+	justify-content: center;
+	.inputLabel{
+		position: absolute;
+		top: -50px;
+		color:var(--page-label);
+		font-size: 17px;
+		font-weight: 700;
+	}
+
+	.wordInput{
+		@include inputStyle;
+		border-radius: 10px;
+		color:var(--text-area);
+		resize: none;
+
+		&:hover {
+			outline: 3px dashed ;
+		}
+
+		&:focus {
+			outline: 3px solid ;
+			&::placeholder {
+				opacity: 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,44 @@
+.noti {
+    position: absolute;
+    left: 50px;
+    top: 40px;
+    display: flex;
+
+    .notiIcon {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+			z-index: 1;
+			&:hover {
+				transform: scale(1.1) ;
+			}
+    }
+
+    .lightIcon {
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 10px;
+      height: 10px;
+      background-color: yellow;
+      border-radius: 50%;
+      z-index: 0;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 2.5px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        background-color: yellow;
+        border-radius: 30px;
+        z-index: 0;
+      }
+    }
+
+    .notiText {
+      padding-left: 10px;
+      font-size: 14px;
+      color:var(--page-label);
+    }
+  }

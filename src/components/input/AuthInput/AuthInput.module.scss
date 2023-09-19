@@ -1,0 +1,41 @@
+@import '@styles/_mixins.scss';
+
+.container {
+  @include inputContainer;
+
+  .inputLabel {
+    width: 20%;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    color: var(--main-label);
+  }
+
+  .authInput {
+    @include inputStyle;
+    border-bottom: 2px solid var(--main-label);
+    background-color: inherit;
+    color: var(--title);
+  
+    &:hover {
+			border-bottom: thick double var(--main-label);
+			box-shadow:  0px 5px 0px 0px var(--pink-tab);
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom: 5px solid var(--main-label);
+			box-shadow:  0px 5px 0px 0px var(--pink-tab);
+      &::placeholder {
+        opacity: 0;
+      }
+    }
+  }
+  .eye {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 17px;
+    cursor: pointer;
+  }
+}
