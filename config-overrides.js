@@ -1,6 +1,7 @@
-const {alias} = require('react-app-rewire-alias')
+const { alias } = require("react-app-rewire-alias");
+const webpack = require("webpack");
 
-module.exports = function override(config){
+module.exports = function override(config) {
   alias({
     "@components": "src/components",
     "@pages": "src/pages",
@@ -12,11 +13,25 @@ module.exports = function override(config){
     "@layout": "src/components/Layout",
     "@modal": "src/components/Modal",
     "@noti": "src/components/Noti",
-    "@showWordWrapper" : "src/components/ShowWordWrapper"
+    "@showWordWrapper": "src/components/ShowWordWrapper",
+    "@api": "src/api",
+    "@context": "src/context",
+    "@alert":"src/components/Alert"
   })(config);
 
-  return config
-}
+  // // 
+  // config.resolve.fallback = {
+  //   ...config.resolve.fallback,
+  //   crypto: require.resolve("crypto-browserify"),
+  //   stream: require.resolve("stream-browserify"),
+  // };
 
-      
-  
+  // config.module.rules.unshift({
+  //   test: /\.m?js$/,
+  //   resolve: {
+  //     fullySpecified: false, // disable the behavior
+  //   },
+  // });
+
+  return config;
+};

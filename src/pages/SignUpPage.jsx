@@ -1,21 +1,66 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "@styles/main.module.scss";
 import AuthInput from "@authInput/AuthInput";
 import MainBtn from "@mainBtn/MainBtn";
+import { signup } from "@api/auth";
+import Swal from "sweetalert2";
+import Alert from "@alert/Alert";
 
 const SignUpPage = () => {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
+  const navigate = useNavigate();
+  const [showErrAlert, setShowErrAlert] = useState(false);
 
   const handleShowPwClick = () => {
     setShowPw(!showPw);
   };
 
-  const handleSignUpClick = () => {};
+  const handleSignUpClick = async () => {
+    if (username === 0 || email === 0 || account === 0 || password === 0) {
+      return;
+    }
+
+    // 重置狀態
+    setShowErrAlert(false);
+
+    // 註冊中提示
+    const loadingAlert = Swal.fire({
+      title: "正在註冊...",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+    });
+
+    const res = await signup({
+      username,
+      email,
+      account,
+      password,
+    });
+
+    loadingAlert.close();
+
+    const { success } = res;
+
+    if (success) {
+      Swal.fire({
+        position: "top",
+        title: "註冊成功",
+        timer: 1000,
+        icon: "success",
+        showConfirmButton: false,
+      });
+      navigate("/login");
+      return;
+    } else {
+      console.log("Error response:", res);
+      setShowErrAlert(res.message);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -25,9 +70,9 @@ const SignUpPage = () => {
       <div className={styles.inputWrapper}>
         <AuthInput
           label="名稱"
-          value={name}
+          value={username}
           placeholder="請輸入名稱"
-          onChange={(nameInput) => setName(nameInput)}
+          onChange={(nameInput) => setUsername(nameInput)}
         />
         <AuthInput
           type="email"
@@ -56,6 +101,7 @@ const SignUpPage = () => {
         <Link to="/login">
           <div className={styles.linkto}>取消</div>
         </Link>
+        {showErrAlert ? <Alert msg={showErrAlert}/> : ""}
       </div>
     </div>
   );

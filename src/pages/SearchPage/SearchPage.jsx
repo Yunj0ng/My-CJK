@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./SearchPage.module.scss";
 import Layout from "@layout/Layout";
 import WordInput from "@wordInput/WordInput";
 import PageBtn from "@pageBtn/PageBtn";
-import Noti from '@noti/Noti';
+import Noti from "@noti/Noti";
+import { useAuth } from "@context/AuthContext";
 
 const SearchPage = () => {
   const [korean, setKorean] = useState("");
   const [chinese, setChinese] = useState("");
   const [japanese, setJapanese] = useState("");
+  const navigate = useNavigate();
+  const { isAuthenticated, currentUser } = useAuth();
 
   const handleSearchBtnClick = () => {};
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
 
   return (
     <Layout>
