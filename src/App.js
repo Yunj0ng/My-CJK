@@ -1,4 +1,4 @@
-import { BrowserRouter,Routes,Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   LoginPage,
   SignUpPage,
@@ -7,7 +7,7 @@ import {
   CreatePage,
   NotFound,
 } from "@pages/index.js";
-import styles from './App.scss';
+import styles from "./App.scss";
 import { AuthProvider } from "@context/AuthContext";
 
 function App() {

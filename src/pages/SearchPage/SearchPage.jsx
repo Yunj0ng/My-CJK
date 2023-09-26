@@ -6,6 +6,8 @@ import WordInput from "@wordInput/WordInput";
 import PageBtn from "@pageBtn/PageBtn";
 import Noti from "@noti/Noti";
 import { useAuth } from "@context/AuthContext";
+import { getSearchVocabulary } from "@api/vocabulary";
+import Swal from "sweetalert2";
 
 const SearchPage = () => {
   const [korean, setKorean] = useState("");
@@ -14,7 +16,36 @@ const SearchPage = () => {
   const navigate = useNavigate();
   const { isAuthenticated, currentUser } = useAuth();
 
-  const handleSearchBtnClick = () => {};
+  const handleSearchBtnClick = async() => {
+    const id = currentUser.id
+    const searched = {}
+    if(korean.trim() !== ''){
+      searched.word = korean;
+    }
+    if(chinese.trim() !==''){
+      searched.word = chinese
+    }
+    if(japanese.trim() !== ''){
+      searched.word = japanese
+    }
+    const res = await getSearchVocabulary({id:id, ...searched})
+    console.log(res)
+    if(res.length > 0){
+      const firstResult = res[0]
+      localStorage.setItem('vocabularyId',firstResult.id)
+      navigate(`/${firstResult.id}`);
+    } else {
+      Swal.fire({
+        position: "top",
+        title: "查無單字",
+        timer: 1000,
+        icon: "error",
+        showConfirmButton: false,
+      });
+    }
+    
+
+  };
 
   useEffect(() => {
     if (!isAuthenticated) {

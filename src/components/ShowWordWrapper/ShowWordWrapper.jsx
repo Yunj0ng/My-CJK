@@ -57,10 +57,10 @@ const ShowWordWrapper = ({
           className={styles.text}
           // dangerouslySetInnerHTML={{ __html: text }}
         >
-          {text.split("\n").map((line, index) => (
+          {text?.split("\n").map((line, index) => (
             <Fragment key={index}>
               {line}
-              {index < text.split("\n").length - 1 && <br />}
+              {index < text?.split("\n").length - 1 && <br />}
             </Fragment>
           ))}
         </span>

@@ -33,7 +33,7 @@ const LoginPage = () => {
 
     loadingAlert.close();
 
-    if(res.success){
+    if(res.success === true){
       Swal.fire({
         position: "top",
         title: "登入成功",
@@ -43,7 +43,7 @@ const LoginPage = () => {
       });
       return
     }
-    if(!res.success){
+    if(res.success === false){
       Swal.fire({
         position: "top",
         title: "帳號或密碼錯誤",
