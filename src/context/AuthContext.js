@@ -44,14 +44,15 @@ export const AuthProvider = ({ children }) => {
             account: data.account,
             password: data.password,
           });
-          console.log("Login response:", res.data);
           const { success } = res;
           if (success) {
             const token = res.data.token;
+            const userId = res.data.user.id 
             const tempPayload = jwt_decode(token);
             setPayload(tempPayload);
             setIsAuthenticated(true);
             localStorage.setItem("token", token);
+            localStorage.setItem('userId',userId)
           } else {
             setPayload(null);
             setIsAuthenticated(false);

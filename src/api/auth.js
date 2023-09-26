@@ -8,13 +8,11 @@ export const login = async ({ account, password }) => {
       account,
       password,
     });
-		console.log("Login response:", data);
     const { token } = data;
 
     if (token) {
       return { success: true, ...data };
     }
-    console.log(data);
     return data;
   } catch (err) {
       console.error("[Login Failed]:", err);
@@ -35,12 +33,9 @@ export const signup = async ({ username, email, account, password }) => {
     if (user) {
       return { success: true, ...data };
     }
-    console.log(data);
     return data;
   } catch (err) {
 		if(err.response?.data?.message){
-			// const {message:errorMsg} = err.response.data
-			console.log(err.response.data);
 			return 	err.response.data
 		} else {
 			console.error("[SignUp Failed]:", err);

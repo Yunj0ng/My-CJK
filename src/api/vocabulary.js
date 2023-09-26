@@ -28,19 +28,57 @@ export const getSearchVocabulary = async ({ id, word }) => {
         },
       }
     );
-    console.log('getsearch-api:',res.data)
     return res.data;
   } catch (err) {
     console.error(err);
   }
 };
 export const getVocabulary = async (id) => {
-  console.log("getvo-api-id:",id)
   try {
     const res = await axiosInstance.get(`${baseURL}/vocabulary/${id}`);
-    console.log("getvo-api:", res.data);
     return res.data;
   } catch (err) {
     console.error(err);
   }
 };
+
+export const postVocabulary = async (payload) => {
+  const {
+  OriginalText_Korean,
+  OriginalText_Chinese,
+  OriginalText_Japanese,
+  UserId,
+} = payload
+  try {
+    const res = await axiosInstance.post(`${baseURL}/vocabulary`, {
+      OriginalText_Korean,
+      OriginalText_Chinese,
+      OriginalText_Japanese,
+      UserId,
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const putVocabulary = async(payload)=>{
+  const {
+    id,
+    TranslatedText_Korean,
+    TranslatedText_Chinese,
+    TranslatedText_Japanese,
+    UserId
+  } = payload;
+  try{
+    const res = await axiosInstance.put(`${baseURL}/vocabulary/${id}`, {
+      TranslatedText_Korean,
+      TranslatedText_Chinese,
+      TranslatedText_Japanese,
+      UserId,
+    });
+    return res.data
+  }catch(err){
+    console.error(err)
+  }
+}
