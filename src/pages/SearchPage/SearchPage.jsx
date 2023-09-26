@@ -29,10 +29,9 @@ const SearchPage = () => {
       searched.word = japanese
     }
     const res = await getSearchVocabulary({id:id, ...searched})
-    console.log(res)
     if(res.length > 0){
       const firstResult = res[0]
-      localStorage.setItem('vocabularyId',firstResult.id)
+      // localStorage.setItem('vocabularyId',firstResult.id)
       navigate(`/${firstResult.id}`);
     } else {
       Swal.fire({

@@ -1,16 +1,58 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./CreatePage.module.scss";
 import Layout from "@layout/Layout";
 import WordInput from "@wordInput/WordInput";
 import PageBtn from "@pageBtn/PageBtn";
 import Noti from "@noti/Noti";
+import {postVocabulary} from "@api/vocabulary"
+import Swal from "sweetalert2";
+import {useAuth} from "@context/AuthContext"
 
 const CreatePage = () => {
   const [korean, setKorean] = useState("");
   const [chinese, setChinese] = useState("");
   const [japanese, setJapanese] = useState("");
+  const navigate = useNavigate()
+  const {isAuthenticated} = useAuth()
+  
 
-  const handleCreateBtnClick = () => {};
+  const handleCreateBtnClick = async() => {
+    const OriginalText_Korean = korean
+    const OriginalText_Chinese = chinese
+    const OriginalText_Japanese = japanese
+    const UserId = localStorage.getItem("userId");
+
+    const res = await postVocabulary({
+      OriginalText_Korean,
+      OriginalText_Chinese,
+      OriginalText_Japanese,
+      UserId,
+    });
+    if(res){
+      Swal.fire({
+        position: "top",
+        title: "已新增單字",
+        timer: 1000,
+        icon: "success",
+        showConfirmButton: false,
+      });
+    } else{
+      Swal.fire({
+        position: "top",
+        title: "新增失敗",
+        timer: 1000,
+        icon: "error",
+        showConfirmButton: false,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <Layout>
       <div className={styles.container}>

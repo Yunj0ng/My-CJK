@@ -1,46 +1,26 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./ShowPage.module.scss";
 import Layout from "@layout/Layout";
 import Noti from "@noti/Noti";
 import ShowWordWrapper from "@showWordWrapper/ShowWordWrapper";
 import { useAuth } from "@context/AuthContext";
-import { getVocabulary } from "@api/vocabulary";;
-
-// const dummyData = [
-//   {
-//     VocabularyID: 1,
-//     OriginalText: {
-//       Korean: "안녕",
-//       Japanese: "こんにちは",
-//       Chinese: "你好",
-//     },
-//     TranslatedText: {
-//       Korean: "안녕",
-//       Japanese: "こんにちは",
-//       Chinese: "你好",
-//     },
-//     UserID: 101,
-//     CreatedAt: "2023-09-13T10:00:00",
-//   },
-// ];
+import { getVocabulary, putVocabulary } from "@api/vocabulary";
+import Swal from "sweetalert2";
 
 const ShowPage = () => {
   const [data, setData] = useState("");
   const [editingLanguage, setEditingLanguage] = useState(null);
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
-  // const { id } = useParams();
-  const id = localStorage.getItem('vocabularyId')
-  console.log("wordid:", id);
+  const { id } = useParams();
+  const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
-    console.log("ShowPage component is mounted.");
     const getVocabularyAsync = async () => {
-      if(id){
+      if (id) {
         try {
           const vocabulary = await getVocabulary(id);
-          console.log("vocabulary:", vocabulary);
           setData(vocabulary);
         } catch (err) {
           console.error(err);
@@ -48,22 +28,58 @@ const ShowPage = () => {
       }
     };
     getVocabularyAsync();
-  }, [id]);
+  }, [id, rerender]);
 
   const handleChangeMode = ({ language, isEdit }) => {
     setEditingLanguage(isEdit ? language : null);
   };
 
-  const handleSave = (language, newText) => {
+  const handleSave = async (language, newText) => {
     const formattedText = newText.replace(/<br>/g, "\n"); //將<br>轉換成'\n'
-    setData((prevData) => ({
-      ...prevData,
-      TranslatedText: {
-        ...prevData.TranslatedText,
-        [language]: formattedText,
-      },
-    }));
-    setEditingLanguage(null);
+    try {
+      const res = await putVocabulary({
+        id: data.id,
+        UserId: data.UserId,
+        TranslatedText_Korean:
+          language === "Korean" ? formattedText : data.TranslatedText_Korean,
+        TranslatedText_Chinese:
+          language === "Chinese" ? formattedText : data.TranslatedText_Chinese,
+        TranslatedText_Japanese:
+          language === "Japanese"
+            ? formattedText
+            : data.TranslatedText_Japanese,
+      });
+      if (res && res.success === true) {
+        setData((prevData) => ({
+          ...prevData,
+          TranslatedText: {
+            ...prevData.TranslatedText,
+            [language]: formattedText,
+          },
+        }));
+
+        // 強制觸發重新渲染
+        setRerender((prevRerender) => !prevRerender);
+        setEditingLanguage(null);
+        Swal.fire({
+          position: "top",
+          title: "變更已儲存",
+          timer: 1000,
+          icon: "success",
+          showConfirmButton: false,
+        });
+      }else {
+        Swal.fire({
+          position: "top",
+          title: "變更失敗",
+          timer: 1000,
+          icon: "error",
+          showConfirmButton: false,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {

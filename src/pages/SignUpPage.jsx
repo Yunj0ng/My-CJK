@@ -57,7 +57,6 @@ const SignUpPage = () => {
       navigate("/login");
       return;
     } else {
-      console.log("Error response:", res);
       setShowErrAlert(res.message);
     }
   };
