@@ -7,6 +7,7 @@ import ShowWordWrapper from "@showWordWrapper/ShowWordWrapper";
 import { useAuth } from "@context/AuthContext";
 import { getVocabulary, putVocabulary } from "@api/vocabulary";
 import Swal from "sweetalert2";
+import Loading from "@loading/Loading";
 
 const ShowPage = () => {
   const [data, setData] = useState("");
@@ -15,6 +16,7 @@ const ShowPage = () => {
   const { isAuthenticated } = useAuth();
   const { id } = useParams();
   const [rerender, setRerender] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getVocabularyAsync = async () => {
@@ -24,6 +26,8 @@ const ShowPage = () => {
           setData(vocabulary);
         } catch (err) {
           console.error(err);
+        } finally {
+          setLoading(false); //當取得資料後變回false
         }
       }
     };
@@ -64,14 +68,20 @@ const ShowPage = () => {
         Swal.fire({
           position: "top",
           title: "變更已儲存",
+          color: "#868faf",
+          background: "#faf9f5",
+          width: 394,
           timer: 1000,
           icon: "success",
           showConfirmButton: false,
         });
-      }else {
+      } else {
         Swal.fire({
           position: "top",
           title: "變更失敗",
+          color: "#868faf",
+          background: "#faf9f5",
+          width: 394,
           timer: 1000,
           icon: "error",
           showConfirmButton: false,
@@ -79,6 +89,8 @@ const ShowPage = () => {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false); //當取得資料後變回false
     }
   };
 
@@ -90,36 +102,40 @@ const ShowPage = () => {
 
   return (
     <Layout>
-      <div className={styles.container}>
-        <ShowWordWrapper
-          title="韓文"
-          language="Korean"
-          editingLanguage="Korean"
-          text={data.TranslatedText_Korean}
-          isEdit={editingLanguage === "Korean"}
-          onChangeMode={handleChangeMode}
-          onSave={handleSave}
-        />
-        <ShowWordWrapper
-          title="中文"
-          language="Chinese"
-          editingLanguage="Chinese"
-          text={data.TranslatedText_Chinese}
-          isEdit={editingLanguage === "Chinese"}
-          onChangeMode={handleChangeMode}
-          onSave={handleSave}
-        />
-        <ShowWordWrapper
-          title="日文"
-          language="Japanese"
-          editingLanguage="Japanese"
-          text={data.TranslatedText_Japanese}
-          isEdit={editingLanguage === "Japanese"}
-          onChangeMode={handleChangeMode}
-          onSave={handleSave}
-        />
-        <Noti text="在文字框(白底)點擊滑鼠兩下可編輯內容，編輯後按 enter 儲存 或按 esc 取消" />
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className={styles.container}>
+          <ShowWordWrapper
+            title="韓文"
+            language="Korean"
+            editingLanguage="Korean"
+            text={data.TranslatedText_Korean}
+            isEdit={editingLanguage === "Korean"}
+            onChangeMode={handleChangeMode}
+            onSave={handleSave}
+          />
+          <ShowWordWrapper
+            title="中文"
+            language="Chinese"
+            editingLanguage="Chinese"
+            text={data.TranslatedText_Chinese}
+            isEdit={editingLanguage === "Chinese"}
+            onChangeMode={handleChangeMode}
+            onSave={handleSave}
+          />
+          <ShowWordWrapper
+            title="日文"
+            language="Japanese"
+            editingLanguage="Japanese"
+            text={data.TranslatedText_Japanese}
+            isEdit={editingLanguage === "Japanese"}
+            onChangeMode={handleChangeMode}
+            onSave={handleSave}
+          />
+          <Noti text="在文字框(白底)點擊滑鼠兩下可編輯內容，編輯後按 enter 儲存 或按 esc 取消" />
+        </div>
+      )}
     </Layout>
   );
 };

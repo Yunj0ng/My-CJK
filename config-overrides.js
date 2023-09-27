@@ -16,7 +16,8 @@ module.exports = function override(config) {
     "@showWordWrapper": "src/components/ShowWordWrapper",
     "@api": "src/api",
     "@context": "src/context",
-    "@alert":"src/components/Alert"
+    "@alert":"src/components/Alert",
+    "@loading":"src/components/Loading"
   })(config);
 
   // // 

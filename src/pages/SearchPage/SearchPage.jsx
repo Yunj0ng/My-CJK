@@ -16,34 +16,34 @@ const SearchPage = () => {
   const navigate = useNavigate();
   const { isAuthenticated, currentUser } = useAuth();
 
-  const handleSearchBtnClick = async() => {
-    const id = currentUser.id
-    const searched = {}
-    if(korean.trim() !== ''){
+  const handleSearchBtnClick = async () => {
+    const id = currentUser.id;
+    const searched = {};
+    if (korean.trim() !== "") {
       searched.word = korean;
     }
-    if(chinese.trim() !==''){
-      searched.word = chinese
+    if (chinese.trim() !== "") {
+      searched.word = chinese;
     }
-    if(japanese.trim() !== ''){
-      searched.word = japanese
+    if (japanese.trim() !== "") {
+      searched.word = japanese;
     }
-    const res = await getSearchVocabulary({id:id, ...searched})
-    if(res.length > 0){
-      const firstResult = res[0]
-      // localStorage.setItem('vocabularyId',firstResult.id)
+    const res = await getSearchVocabulary({ id: id, ...searched });
+    if (res.length > 0) {
+      const firstResult = res[0];
       navigate(`/${firstResult.id}`);
     } else {
       Swal.fire({
         position: "top",
         title: "查無單字",
         timer: 1000,
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
         icon: "error",
         showConfirmButton: false,
       });
     }
-    
-
   };
 
   useEffect(() => {

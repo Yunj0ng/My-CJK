@@ -26,9 +26,11 @@ const ShowWordWrapper = ({
 
   // 監聽鍵盤事件 儲存,取消,換行
   const handleKeyDown = (e) => {
+    // 按enter儲存
     if (inputRef.current.value.length > 0 && e.key === "Enter" && !e.shiftKey) {
       onSave?.(language, inputRef.current.value);
     }
+    // 按esc取消
     if (e.key === "Escape") {
 			inputRef.current.value = text;
       onChangeMode?.({ language, isEdit: false });

@@ -37,6 +37,9 @@ const LoginPage = () => {
       Swal.fire({
         position: "top",
         title: "登入成功",
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
         timer: 1000,
         icon: "success",
         showConfirmButton: false,
@@ -47,6 +50,9 @@ const LoginPage = () => {
       Swal.fire({
         position: "top",
         title: "帳號或密碼錯誤",
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
         timer: 1000,
         icon: "error",
         showConfirmButton: false,

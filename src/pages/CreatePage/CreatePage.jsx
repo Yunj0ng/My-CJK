@@ -33,6 +33,9 @@ const CreatePage = () => {
       Swal.fire({
         position: "top",
         title: "已新增單字",
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
         timer: 1000,
         icon: "success",
         showConfirmButton: false,
@@ -41,6 +44,9 @@ const CreatePage = () => {
       Swal.fire({
         position: "top",
         title: "新增失敗",
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
         timer: 1000,
         icon: "error",
         showConfirmButton: false,

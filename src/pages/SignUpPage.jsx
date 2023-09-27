@@ -31,6 +31,9 @@ const SignUpPage = () => {
     // 註冊中提示
     const loadingAlert = Swal.fire({
       title: "正在註冊...",
+      color: "#868faf",
+      background: "#faf9f5",
+      width: 394,
       allowOutsideClick: false,
       showConfirmButton: false,
     });
@@ -50,6 +53,9 @@ const SignUpPage = () => {
       Swal.fire({
         position: "top",
         title: "註冊成功",
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
         timer: 1000,
         icon: "success",
         showConfirmButton: false,
@@ -100,7 +106,7 @@ const SignUpPage = () => {
         <Link to="/login">
           <div className={styles.linkto}>取消</div>
         </Link>
-        {showErrAlert ? <Alert msg={showErrAlert}/> : ""}
+        {showErrAlert ? <Alert msg={showErrAlert} /> : ""}
       </div>
     </div>
   );

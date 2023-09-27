@@ -1,0 +1,194 @@
+%img-shared {
+  width: 100%;
+  height: 100%;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+%img-rouge {
+  position: absolute;
+  top: 45px;
+  content: " ";
+  width: 20px;
+  height: 20px;
+  background-color: var(--rouge);
+  box-shadow: 0px 0px 5px 5px rgba(230, 28, 72, 0.9);
+  border-radius: 10px;
+}
+
+%img-eye {
+  position: absolute;
+  top: 35px;
+  left: 30px;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 10px;
+}
+
+%img-eyebrow {
+  position: absolute;
+  top: -10px;
+  left: -5px;
+  content: "";
+  width: 20px;
+  height: 6px;
+  background-color: black;
+}
+
+%img-mouth {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 45px;
+  height: 4px;
+  background-color: transparent;
+  border: 2px solid black;
+}
+
+.container {
+  position: absolute;
+  top: 20%;
+  right: 50%;
+  transform: translate(50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  border: 3px solid black;
+  background-color: white;
+  z-index: 3;
+
+  .loadingImg {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+
+    .img1 {
+      @extend %img-shared;
+      background-color: yellow;
+
+      .img1eye {
+        @extend %img-eye;
+        left: 30px;
+
+        &::before {
+          @extend %img-eye;
+          top: 0px;
+          right: 30px;
+        }
+      }
+
+      .img1mouth {
+        @extend %img-mouth;
+        // 水平方向/垂直方向
+        border-radius: 0 0 50% 50% / 20% 20% 100% 100%;
+      }
+    }
+
+    .img2 {
+      @extend %img-shared;
+      position: absolute;
+      top: 0;
+      background-color: var(--rouge);
+
+      .img2eye {
+        @extend %img-eye;
+        &::before {
+          @extend %img-eyebrow;
+          transform: rotate(30deg);
+        }
+        &::after {
+          @extend %img-eye;
+          top: 0px;
+          right: 30px;
+        }
+      }
+
+      .img2mouth {
+        @extend %img-mouth;
+        // border-radius: 50% 50% 0 0 / 100% 100% 20% 20%;
+        &::before {
+          @extend %img-eyebrow;
+          top: -47px;
+          left: 27px;
+          transform: rotate(-30deg);
+        }
+      }
+    }
+
+    .img3 {
+      @extend %img-shared;
+      position: absolute;
+      top: 0;
+      background-color: var(--sad);
+
+      .img3eye {
+        @extend %img-eye;
+        &::before {
+          @extend %img-eyebrow;
+          left: -10px;
+          transform: rotate(-30deg);
+        }
+        &::after {
+          @extend %img-eye;
+          top: 0px;
+          right: 30px;
+        }
+      }
+
+      .img3mouth {
+        @extend %img-mouth;
+        border-radius: 50% 50% 0 0 / 100% 100% 20% 20%;
+        &::before {
+          @extend %img-eyebrow;
+          top: -47px;
+          left: 30px;
+          transform: rotate(30deg);
+        }
+      }
+    }
+
+    .img4 {
+      @extend %img-shared;
+      position: absolute;
+      top: 0;
+      background-color: yellow;
+
+      &::before {
+        @extend %img-rouge;
+        left: 10px;
+      }
+      &::after {
+        @extend %img-rouge;
+        right: 10px;
+      }
+
+      .img4eye {
+        @extend %img-eye;
+        left: 30px;
+        z-index: 1;
+
+        &::before {
+          @extend %img-eye;
+          top: 0px;
+          right: 30px;
+        }
+      }
+      .img4mouth {
+        @extend %img-mouth;
+        // 水平方向/垂直方向
+        border: 10px solid black;
+        border-radius: 0 0 50% 50% / 20% 20% 100% 100%;
+        top: 60px;
+        z-index: 1;
+      }
+    }
+  }
+}
