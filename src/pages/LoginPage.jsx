@@ -10,13 +10,26 @@ import Swal from "sweetalert2";
 const LoginPage = () => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth();
   
-
+   const handleShowPwClick = () => {
+     setShowPw(!showPw);
+   };
 
   const handleLoginClick = async() => {
-    if(account === 0 || password === 0){
+    if(!account || !password){
+      Swal.fire({
+        position: "top",
+        title: "請填寫所有欄位",
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
+        timer: 1000,
+        icon: "error",
+        showConfirmButton: false,
+      });
       return
     }
 
@@ -27,13 +40,13 @@ const LoginPage = () => {
       showConfirmButton: false,
     });
 
-    const res = await login({
+    const success = await login({
       account, password
     })
-
+     
     loadingAlert.close();
 
-    if(res.success === true){
+    if(success){
       Swal.fire({
         position: "top",
         title: "登入成功",
@@ -46,7 +59,7 @@ const LoginPage = () => {
       });
       return
     }
-    if(res.success === false){
+    
       Swal.fire({
         position: "top",
         title: "帳號或密碼錯誤",
@@ -57,7 +70,7 @@ const LoginPage = () => {
         icon: "error",
         showConfirmButton: false,
       });
-    }
+    
 
   };
 
@@ -81,11 +94,13 @@ const LoginPage = () => {
           onChange={(accInput) => setAccount(accInput)}
         />
         <AuthInput
-          type="password"
+          type={showPw ? "text" : "password"}
+          showPw={showPw}
           label="密碼"
           value={password}
           placeholder="請輸入密碼"
           onChange={(pwInput) => setPassword(pwInput)}
+          onClick={handleShowPwClick}
         />
         <MainBtn text="登入" onClick={handleLoginClick} />
         <Link to="/signup">

@@ -3,19 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@context/AuthContext";
 
 const Layout = ({ children }) => {
-  const navigate = useNavigate()
-  const { logout } = useAuth()
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleTabClick = (tab) => {
-		if (tab === 'search'){
-			navigate("/search");
-		} else if (tab === 'logout'){
-      logout()
-			navigate('/login')
-		}else {
-			navigate('/create')
-		}
-    
+    if (tab === "search") {
+      navigate("/search");
+    } else if (tab === "logout") {
+      logout();
+      navigate("/login");
+    } else {
+      navigate("/create");
+    }
   };
   return (
     <div className={styles.container}>

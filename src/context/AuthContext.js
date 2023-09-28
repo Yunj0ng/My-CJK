@@ -1,7 +1,8 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { login} from "@api/auth";
+import { login } from "@api/auth";
 import jwt_decode from "jwt-decode";
+
 
 const defaultAuthContext = {
   isAuthenticated: false,
@@ -18,17 +19,17 @@ export const AuthProvider = ({ children }) => {
 
   // 驗證使用者token
   useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setIsAuthenticated(false);
-        setPayload(null);
-        return;
-      }
-      if (token) {
-        setIsAuthenticated(true);
-        const tempPayload = jwt_decode(token);
-        setPayload(tempPayload);
-      } 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setIsAuthenticated(false);
+      setPayload(null);
+      return;
+    }
+    if (token) {
+      setIsAuthenticated(true);
+      const tempPayload = jwt_decode(token);
+      setPayload(tempPayload);
+    }
   }, [pathname]);
 
   return (
@@ -40,24 +41,30 @@ export const AuthProvider = ({ children }) => {
           username: payload.username,
         },
         login: async (data) => {
-          const res = await login({
-            account: data.account,
-            password: data.password,
-          });
-          const { success } = res;
-          if (success) {
-            const token = res.data.token;
-            const userId = res.data.user.id 
-            const tempPayload = jwt_decode(token);
-            setPayload(tempPayload);
-            setIsAuthenticated(true);
-            localStorage.setItem("token", token);
-            localStorage.setItem('userId',userId)
-          } else {
-            setPayload(null);
-            setIsAuthenticated(false);
+          try {
+            const res = await login({
+              account: data.account,
+              password: data.password,
+            });
+            if (res) {
+              const { success } = res;
+              const token = res.data.token;
+              const userId = res.data.user.id;
+              const tempPayload = jwt_decode(token);
+              if (tempPayload) {
+                setPayload(tempPayload);
+                setIsAuthenticated(true);
+                localStorage.setItem("token", token);
+                localStorage.setItem("userId", userId);
+                return success;
+              } else {
+                setPayload(null);
+                setIsAuthenticated(false);
+              }
+            }
+          } catch (err) {
+            console.error("[Login Error]:", err);
           }
-          return success;
         },
         logout: () => {
           localStorage.removeItem("token");

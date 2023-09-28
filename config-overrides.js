@@ -20,19 +20,6 @@ module.exports = function override(config) {
     "@loading":"src/components/Loading"
   })(config);
 
-  // // 
-  // config.resolve.fallback = {
-  //   ...config.resolve.fallback,
-  //   crypto: require.resolve("crypto-browserify"),
-  //   stream: require.resolve("stream-browserify"),
-  // };
-
-  // config.module.rules.unshift({
-  //   test: /\.m?js$/,
-  //   resolve: {
-  //     fullySpecified: false, // disable the behavior
-  //   },
-  // });
 
   return config;
 };

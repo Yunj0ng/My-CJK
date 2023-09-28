@@ -21,10 +21,6 @@ const SignUpPage = () => {
   };
 
   const handleSignUpClick = async () => {
-    if (username === 0 || email === 0 || account === 0 || password === 0) {
-      return;
-    }
-
     // 重置狀態
     setShowErrAlert(false);
 

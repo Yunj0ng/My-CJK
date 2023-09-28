@@ -1,68 +1,67 @@
-@import '@styles/_mixins.scss';
+@import "@styles/_mixins.scss";
 
 .container {
-	@include container;
-	display: flex;
-	justify-content: space-between;
+  @include container;
+  display: flex;
+  justify-content: space-between;
 
-	.left {
-		flex:1;
-	}
+  .left {
+    flex: 1;
+  }
 
-	.right {
-		display: flex;
-		flex-direction: column;
-		width: 80px;
-		height: 100%;
+  .right {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+    height: 100%;
 
-		& button {
-			position: relative;
-			width: 0px;
-			height: 0px;
-			border-top: 80px solid transparent;
-			border-bottom: 80px solid transparent;
-			border-left: 90px solid var(--green-tab);
+    & button {
+      position: relative;
+      width: 0px;
+      height: 0px;
+      border-top: 80px solid transparent;
+      border-bottom: 80px solid transparent;
+      border-left: 90px solid var(--green-tab);
 
-			&::after {
-				position: absolute;
-				top: 50%;
-				right:10px;
-				transform: translateY(-50%);
-				content:'';
-				width: 30px;
-				height: 60px; 
-				background-color: white;
-			}
-			&:hover {
-				border-left: 90px solid var(--green-tab-hover);
-			}
-		}
+      &::after {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        content: "";
+        width: 30px;
+        height: 60px;
+        background-color: white;
+      }
+      &:hover {
+        border-left: 90px solid var(--green-tab-hover);
+      }
+    }
 
-		.createBtn {
-			border-left: 90px solid var(--pink-tab);
+    .createBtn {
+      border-left: 90px solid var(--pink-tab);
 
-			&:hover {
-				border-left: 90px solid var(--pink-tab-hover);
-			}
-		}
+      &:hover {
+        border-left: 90px solid var(--pink-tab-hover);
+      }
+    }
 
-		.logoutBtn {
-			border-left: 90px solid var(--blue-tab);
-			&:hover {
-				border-left: 90px solid var(--blue-tab-hover);
-			}
-		}
+    .logoutBtn {
+      border-left: 90px solid var(--blue-tab);
+      &:hover {
+        border-left: 90px solid var(--blue-tab-hover);
+      }
+    }
 
-		span {
-				position: absolute;
-				top: -50%;
-				left: -75px;
-				transform: translateY(-50%);
-				height: 60px;
-				writing-mode: vertical-rl;
-				font-size: 20px;
-				color: var(--tab-font-color);
-			}
-	}
+    span {
+      position: absolute;
+      top: -50%;
+      left: -75px;
+      transform: translateY(-50%);
+      height: 60px;
+      writing-mode: vertical-rl;
+      font-size: 20px;
+      color: var(--tab-font-color);
+    }
+  }
 }
-

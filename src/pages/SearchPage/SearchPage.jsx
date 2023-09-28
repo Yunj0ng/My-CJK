@@ -19,6 +19,21 @@ const SearchPage = () => {
   const handleSearchBtnClick = async () => {
     const id = currentUser.id;
     const searched = {};
+
+    if(!korean && !chinese && !japanese){
+      Swal.fire({
+        position: "top",
+        title: "請輸入單字",
+        timer: 1000,
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
+        icon: "warning",
+        showConfirmButton: false,
+      });
+      return
+    }
+
     if (korean.trim() !== "") {
       searched.word = korean;
     }
@@ -75,7 +90,7 @@ const SearchPage = () => {
             onChange={(japaneseInput) => setJapanese(japaneseInput)}
           />
         </div>
-        <Noti text="可以按 shif + enter 換行" />
+        <Noti text="請擇一輸入要查找的單字" />
         <PageBtn text="查詢" onClick={handleSearchBtnClick} />
       </div>
     </Layout>
