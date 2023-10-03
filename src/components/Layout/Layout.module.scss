@@ -4,9 +4,17 @@
   @include container;
   display: flex;
   justify-content: space-between;
+  padding: unset;
+
+  @include ipad {
+    flex-direction: column-reverse;
+    justify-content: unset;
+    padding: 10px 0;
+  }
 
   .left {
     flex: 1;
+    // height:100%;
   }
 
   .right {
@@ -15,6 +23,12 @@
     width: 80px;
     height: 100%;
 
+    @include ipad {
+      flex-direction: row;
+      width: 100%;
+      height: 50px;
+    }
+
     & button {
       position: relative;
       width: 0px;
@@ -22,6 +36,14 @@
       border-top: 80px solid transparent;
       border-bottom: 80px solid transparent;
       border-left: 90px solid var(--green-tab);
+
+      @include ipad {
+        border: none;
+        width: 33%;
+        height: 100%;
+        background-color: var(--green-tab);
+        border-radius: 15px 215px 0 0;
+      }
 
       &::after {
         position: absolute;
@@ -32,24 +54,53 @@
         width: 30px;
         height: 60px;
         background-color: white;
+
+        @include ipad {
+          display: none;
+        }
       }
       &:hover {
         border-left: 90px solid var(--green-tab-hover);
+
+        @include ipad {
+          border: none;
+          background-color: var(--green-tab-hover);
+        }
       }
     }
 
     .createBtn {
       border-left: 90px solid var(--pink-tab);
 
+      @include ipad {
+        border: none;
+        background-color: var(--pink-tab);
+      }
+
       &:hover {
         border-left: 90px solid var(--pink-tab-hover);
+
+        @include ipad {
+          border: none;
+          background-color: var(--pink-tab-hover);
+        }
       }
     }
 
     .logoutBtn {
       border-left: 90px solid var(--blue-tab);
+
+      @include ipad {
+        border: none;
+        background-color: var(--blue-tab);
+      }
       &:hover {
         border-left: 90px solid var(--blue-tab-hover);
+
+        @include ipad {
+          border: none;
+          background-color: var(--blue-tab-hover);
+        }
       }
     }
 
@@ -62,6 +113,13 @@
       writing-mode: vertical-rl;
       font-size: 20px;
       color: var(--tab-font-color);
+
+      @include ipad {
+        top: 30%;
+        left: 50%;
+        writing-mode: unset;
+        transform: translateX(-50%);
+      }
     }
   }
 }

@@ -9,6 +9,11 @@
     color: var(--page-label);
     font-size: 17px;
     font-weight: 700;
+
+    @include ipad {
+      position: unset;
+      padding-right: 15px;
+    }
   }
 
   .wordInput {

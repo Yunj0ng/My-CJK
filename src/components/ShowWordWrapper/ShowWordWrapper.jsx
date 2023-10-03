@@ -1,4 +1,4 @@
-import {  useRef, Fragment } from "react";
+import { useRef, Fragment } from "react";
 import clsx from "clsx";
 import styles from "./ShowWordWrapper.module.scss";
 
@@ -18,8 +18,8 @@ const ShowWordWrapper = ({
       language,
       isEdit: true,
     });
-		// 確保onChangeMode執行後(即)執行focus textarea
-		setTimeout(() => {
+    // 確保onChangeMode執行後(即)執行focus textarea
+    setTimeout(() => {
       inputRef.current.focus();
     }, 0);
   };
@@ -32,7 +32,7 @@ const ShowWordWrapper = ({
     }
     // 按esc取消
     if (e.key === "Escape") {
-			inputRef.current.value = text;
+      inputRef.current.value = text;
       onChangeMode?.({ language, isEdit: false });
     }
     // 按shift和enter換行

@@ -3,5 +3,9 @@
 .container {
   @include pageContainer;
   flex-direction: row;
-}
 
+  @include ipad {
+    flex-direction: column;
+    padding-top: 130px;
+  }
+}

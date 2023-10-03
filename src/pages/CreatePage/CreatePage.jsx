@@ -1,26 +1,25 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CreatePage.module.scss";
 import Layout from "@layout/Layout";
 import WordInput from "@wordInput/WordInput";
 import PageBtn from "@pageBtn/PageBtn";
 import Noti from "@noti/Noti";
-import {postVocabulary} from "@api/vocabulary"
+import { postVocabulary } from "@api/vocabulary";
 import Swal from "sweetalert2";
-import {useAuth} from "@context/AuthContext"
+import { useAuth } from "@context/AuthContext";
 
 const CreatePage = () => {
   const [korean, setKorean] = useState("");
   const [chinese, setChinese] = useState("");
   const [japanese, setJapanese] = useState("");
-  const navigate = useNavigate()
-  const {isAuthenticated} = useAuth()
-  
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
-  const handleCreateBtnClick = async() => {
-    const OriginalText_Korean = korean
-    const OriginalText_Chinese = chinese
-    const OriginalText_Japanese = japanese
+  const handleCreateBtnClick = async () => {
+    const OriginalText_Korean = korean;
+    const OriginalText_Chinese = chinese;
+    const OriginalText_Japanese = japanese;
     const UserId = localStorage.getItem("userId");
 
     const res = await postVocabulary({
@@ -29,7 +28,7 @@ const CreatePage = () => {
       OriginalText_Japanese,
       UserId,
     });
-    if(res){
+    if (res) {
       Swal.fire({
         position: "top",
         title: "已新增單字",
@@ -40,7 +39,10 @@ const CreatePage = () => {
         icon: "success",
         showConfirmButton: false,
       });
-    } else{
+      setKorean("");
+      setChinese("");
+      setJapanese("");
+    } else {
       Swal.fire({
         position: "top",
         title: "新增失敗",

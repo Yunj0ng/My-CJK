@@ -1,3 +1,5 @@
+@import "@styles/_mixins.scss";
+
 .wrapper {
   width: 300px;
   height: 300px;
@@ -6,14 +8,24 @@
   align-items: center;
   margin: 0 auto;
 
+  @include ipad {
+    flex-direction: row;
+    height: 150px;
+    padding-bottom: 20px;
+  }
+
   .title {
     font-size: 17px;
     color: var(--page-label);
     margin-bottom: 20px;
+
+    @include ipad {
+      margin-bottom: unset;
+    }
   }
 
   .showArea {
-		position: relative;
+    position: relative;
     width: 80%;
     height: 100%;
     background-color: var(--tab-font-color);
@@ -21,38 +33,42 @@
     color: var(--text-area);
     border-radius: 10px;
 
-		&.edit {
-			.input {
-				display: block;
-			}
-			.text {
-				display: none;
-			}
-		}
+    @include ipad {
+      margin-left: 10px;
+    }
 
-		.text{
-			white-space: pre-line; //實現換行效果 會合併連續空白
-		}
+    &.edit {
+      .input {
+        display: block;
+      }
+      .text {
+        display: none;
+      }
+    }
+
+    .text {
+      white-space: pre-line; //實現換行效果 會合併連續空白
+    }
 
     .input {
-			display: none;
-			position: absolute;
-			top:0;
-			left:0;
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
       resize: none;
       width: 100%;
       height: 100%;
       background-color: var(--tab-font-color);
       padding: 5px;
       color: var(--text-area);
-			border: none;
+      border: none;
       border-radius: 10px;
-			font-size: 17px;
-			z-index: 2;
+      font-size: 17px;
+      z-index: 2;
 
-			&:focus{
-				outline: 3px solid var(--green-tab-hover);
-			}
+      &:focus {
+        outline: 3px solid var(--green-tab-hover);
+      }
     }
   }
 }
