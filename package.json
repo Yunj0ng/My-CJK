@@ -1,7 +1,7 @@
 {
   "name": "My-CJK",
   "version": "0.1.0",
-  "homepage": "https://Yunj0ng.github.io/My-CJK",
+  "homepage": "https://yunj0ng.github.io/My-CJK",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
