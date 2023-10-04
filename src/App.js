@@ -10,10 +10,12 @@ import {
 import styles from "./App.scss";
 import { AuthProvider } from "@context/AuthContext";
 
+const basename = process.env.PUBLIC_URL
+
 function App() {
   return (
     <div className={styles.App}>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <AuthProvider>
           <Routes>
             <Route path="/search" element={<SearchPage />} />
