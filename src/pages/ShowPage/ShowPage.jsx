@@ -133,7 +133,7 @@ const ShowPage = () => {
             onChangeMode={handleChangeMode}
             onSave={handleSave}
           />
-          <Noti text="在文字框(白底)點擊滑鼠兩下可編輯內容，編輯後按 enter 儲存 或按 esc 取消" />
+          <Noti text="在文字框(白底)點擊滑鼠兩下可編輯內容(換行請按 shift + enter)，編輯後按 enter 儲存 或按 esc 取消" />
         </div>
       )}
     </Layout>
