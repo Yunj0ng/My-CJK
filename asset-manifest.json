@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/My-CJK/static/css/main.cd590958.css",
-    "main.js": "/My-CJK/static/js/main.0f22f09e.js",
+    "main.js": "/My-CJK/static/js/main.5b364e4c.js",
     "static/js/787.7e906dd2.chunk.js": "/My-CJK/static/js/787.7e906dd2.chunk.js",
     "static/media/eye-off.svg": "/My-CJK/static/media/eye-off.991d71ecde8a215575325272646bcce6.svg",
     "static/media/noti.svg": "/My-CJK/static/media/noti.7e3f76df3c7a62fadb312aa53e97cc01.svg",
     "static/media/eye.svg": "/My-CJK/static/media/eye.dae7324dda94822354b4073fc4a93e2c.svg",
     "index.html": "/My-CJK/index.html",
     "main.cd590958.css.map": "/My-CJK/static/css/main.cd590958.css.map",
-    "main.0f22f09e.js.map": "/My-CJK/static/js/main.0f22f09e.js.map",
+    "main.5b364e4c.js.map": "/My-CJK/static/js/main.5b364e4c.js.map",
     "787.7e906dd2.chunk.js.map": "/My-CJK/static/js/787.7e906dd2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cd590958.css",
-    "static/js/main.0f22f09e.js"
+    "static/js/main.5b364e4c.js"
   ]
 }
