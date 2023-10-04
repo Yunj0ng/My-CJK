@@ -22,12 +22,31 @@ const CreatePage = () => {
     const OriginalText_Japanese = japanese;
     const UserId = localStorage.getItem("userId");
 
+    if (
+      !OriginalText_Korean &&
+      !OriginalText_Chinese &&
+      !OriginalText_Japanese
+    ) {
+      Swal.fire({
+        position: "top",
+        title: "請輸入單字",
+        color: "#868faf",
+        background: "#faf9f5",
+        width: 394,
+        timer: 1000,
+        icon: "warning",
+        showConfirmButton: false,
+      });
+      return;
+    }
+
     const res = await postVocabulary({
       OriginalText_Korean,
       OriginalText_Chinese,
       OriginalText_Japanese,
       UserId,
     });
+
     if (res) {
       Swal.fire({
         position: "top",
@@ -84,7 +103,7 @@ const CreatePage = () => {
             onChange={(japaneseInput) => setJapanese(japaneseInput)}
           />
         </div>
-        <Noti text="可以按 shift + enter 換行" />
+        <Noti text="可以按 enter 換行" />
         <PageBtn text="建立" onClick={handleCreateBtnClick} />
       </div>
     </Layout>
