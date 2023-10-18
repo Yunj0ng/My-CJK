@@ -20,7 +20,7 @@ const SearchPage = () => {
     const id = currentUser.id;
     const searched = {};
 
-    if(!korean && !chinese && !japanese){
+    if (!korean && !chinese && !japanese) {
       Swal.fire({
         position: "top",
         title: "請輸入單字",
@@ -31,7 +31,7 @@ const SearchPage = () => {
         icon: "warning",
         showConfirmButton: false,
       });
-      return
+      return;
     }
 
     if (korean.trim() !== "") {

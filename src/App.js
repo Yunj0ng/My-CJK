@@ -10,7 +10,7 @@ import {
 import styles from "./App.scss";
 import { AuthProvider } from "@context/AuthContext";
 
-const basename = process.env.PUBLIC_URL
+const basename = process.env.PUBLIC_URL;
 
 function App() {
   return (

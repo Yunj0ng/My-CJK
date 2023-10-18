@@ -2,11 +2,11 @@ import { useState } from "react";
 import styles from "./Noti.module.scss";
 import notiIcon from "../../assets/icons/noti.svg";
 
-const Noti = ({text}) => {
-	const [showNoti, setShowNoti] = useState(false);
+const Noti = ({ text }) => {
+  const [showNoti, setShowNoti] = useState(false);
   const [light, setLight] = useState(false);
 
-	const handleNotiClick = () => {
+  const handleNotiClick = () => {
     setShowNoti(!showNoti);
     setLight(!light);
   };
@@ -20,13 +20,9 @@ const Noti = ({text}) => {
         onClick={handleNotiClick}
       />
       {light ? <div className={styles.lightIcon}></div> : ""}
-      {showNoti ? (
-        <span className={styles.notiText}>{text}</span>
-      ) : (
-        ""
-      )}
+      {showNoti ? <span className={styles.notiText}>{text}</span> : ""}
     </div>
   );
 };
 
-export default Noti
+export default Noti;

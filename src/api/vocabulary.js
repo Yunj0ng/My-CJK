@@ -3,19 +3,21 @@ import axios from "axios";
 const baseURL = "https://my-cjk-b.onrender.com/api";
 
 const axiosInstance = axios.create({
-  baseURL:baseURL
-})
+  baseURL: baseURL,
+});
 
-axiosInstance.interceptors.request.use((config)=>{
-  const token =localStorage.getItem('token')
-  if(token){
-    config.headers['Authorization'] = `Bearer ${token}`
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    console.error(error);
   }
-  return config
-},
-(error)=>{
-  console.error(error)
-})
+);
 
 export const getSearchVocabulary = async ({ id, word }) => {
   try {
@@ -44,11 +46,11 @@ export const getVocabulary = async (id) => {
 
 export const postVocabulary = async (payload) => {
   const {
-  OriginalText_Korean,
-  OriginalText_Chinese,
-  OriginalText_Japanese,
-  UserId,
-} = payload
+    OriginalText_Korean,
+    OriginalText_Chinese,
+    OriginalText_Japanese,
+    UserId,
+  } = payload;
   try {
     const res = await axiosInstance.post(`${baseURL}/vocabulary`, {
       OriginalText_Korean,
@@ -62,23 +64,23 @@ export const postVocabulary = async (payload) => {
   }
 };
 
-export const putVocabulary = async(payload)=>{
+export const putVocabulary = async (payload) => {
   const {
     id,
     TranslatedText_Korean,
     TranslatedText_Chinese,
     TranslatedText_Japanese,
-    UserId
+    UserId,
   } = payload;
-  try{
+  try {
     const res = await axiosInstance.put(`${baseURL}/vocabulary/${id}`, {
       TranslatedText_Korean,
       TranslatedText_Chinese,
       TranslatedText_Japanese,
       UserId,
     });
-    return res.data
-  }catch(err){
-    console.error(err)
+    return res.data;
+  } catch (err) {
+    console.error(err);
   }
-}
+};

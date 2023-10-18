@@ -26,6 +26,7 @@
     height: 20px;
     cursor: pointer;
     z-index: 1;
+
     &:hover {
       transform: scale(1.1);
     }
@@ -40,6 +41,7 @@
     background-color: yellow;
     border-radius: 50%;
     z-index: 0;
+    
     &::after {
       content: "";
       position: absolute;

@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@context/AuthContext";
 
 const NotFound = () => {
-	const navigate = useNavigate();
-   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
-   useEffect(()=>{
-    if(isAuthenticated){
-      navigate('/search')
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/search");
     } else {
-      navigate('/login')
+      navigate("/login");
     }
-   },[navigate, isAuthenticated])
+  }, [navigate, isAuthenticated]);
 };
 export default NotFound;

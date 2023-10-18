@@ -3,6 +3,7 @@
 .container {
   @include inputContainer;
   justify-content: center;
+
   .inputLabel {
     position: absolute;
     top: -50px;
@@ -28,6 +29,7 @@
 
     &:focus {
       outline: 3px solid;
+      
       &::placeholder {
         opacity: 0;
       }

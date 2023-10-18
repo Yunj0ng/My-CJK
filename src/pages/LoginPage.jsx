@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "@styles/main.module.scss";
 import AuthInput from "@authInput/AuthInput";
 import MainBtn from "@mainBtn/MainBtn";
 import { useAuth } from "@context/AuthContext";
 import Swal from "sweetalert2";
-
 
 const LoginPage = () => {
   const [account, setAccount] = useState("");
@@ -13,13 +12,13 @@ const LoginPage = () => {
   const [showPw, setShowPw] = useState(false);
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth();
-  
-   const handleShowPwClick = () => {
-     setShowPw(!showPw);
-   };
 
-  const handleLoginClick = async() => {
-    if(!account || !password){
+  const handleShowPwClick = () => {
+    setShowPw(!showPw);
+  };
+
+  const handleLoginClick = async () => {
+    if (!account || !password) {
       Swal.fire({
         position: "top",
         title: "請填寫所有欄位",
@@ -30,7 +29,7 @@ const LoginPage = () => {
         icon: "error",
         showConfirmButton: false,
       });
-      return
+      return;
     }
 
     // 登入中提示
@@ -41,12 +40,13 @@ const LoginPage = () => {
     });
 
     const success = await login({
-      account, password
-    })
-     
+      account,
+      password,
+    });
+
     loadingAlert.close();
 
-    if(success){
+    if (success) {
       Swal.fire({
         position: "top",
         title: "登入成功",
@@ -57,21 +57,19 @@ const LoginPage = () => {
         icon: "success",
         showConfirmButton: false,
       });
-      return
+      return;
     }
-    
-      Swal.fire({
-        position: "top",
-        title: "帳號或密碼錯誤",
-        color: "#868faf",
-        background: "#faf9f5",
-        width: 394,
-        timer: 1000,
-        icon: "error",
-        showConfirmButton: false,
-      });
-    
 
+    Swal.fire({
+      position: "top",
+      title: "帳號或密碼錯誤",
+      color: "#868faf",
+      background: "#faf9f5",
+      width: 394,
+      timer: 1000,
+      icon: "error",
+      showConfirmButton: false,
+    });
   };
 
   useEffect(() => {
@@ -79,7 +77,6 @@ const LoginPage = () => {
       navigate("/search");
     }
   }, [navigate, isAuthenticated]);
-
 
   return (
     <div className={styles.container}>

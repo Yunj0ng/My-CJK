@@ -1,6 +1,6 @@
 import styles from "./AuthInput.module.scss";
 import eye from "../../../assets/icons/eye.svg";
-import eyeOff from "../../../assets/icons/eye-off.svg"
+import eyeOff from "../../../assets/icons/eye-off.svg";
 
 const AuthInput = ({
   type,
@@ -11,7 +11,6 @@ const AuthInput = ({
   showPw,
   onClick,
 }) => {
-  
   return (
     <div className={styles.container}>
       <label className={styles.inputLabel}>{label}</label>

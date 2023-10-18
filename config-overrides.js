@@ -1,5 +1,4 @@
 const { alias } = require("react-app-rewire-alias");
-const webpack = require("webpack");
 
 module.exports = function override(config) {
   alias({
@@ -16,10 +15,9 @@ module.exports = function override(config) {
     "@showWordWrapper": "src/components/ShowWordWrapper",
     "@api": "src/api",
     "@context": "src/context",
-    "@alert":"src/components/Alert",
-    "@loading":"src/components/Loading"
+    "@alert": "src/components/Alert",
+    "@loading": "src/components/Loading",
   })(config);
-
 
   return config;
 };

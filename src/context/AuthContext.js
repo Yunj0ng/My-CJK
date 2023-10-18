@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { login } from "@api/auth";
 import jwt_decode from "jwt-decode";
 
-
 const defaultAuthContext = {
   isAuthenticated: false,
   currentUser: null,

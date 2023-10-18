@@ -100,6 +100,7 @@
 
       .img2eye {
         @extend %img-eye;
+
         &::before {
           @extend %img-eyebrow;
           transform: rotate(30deg);
@@ -131,6 +132,7 @@
 
       .img3eye {
         @extend %img-eye;
+
         &::before {
           @extend %img-eyebrow;
           left: -10px;
@@ -146,6 +148,7 @@
       .img3mouth {
         @extend %img-mouth;
         border-radius: 50% 50% 0 0 / 100% 100% 20% 20%;
+
         &::before {
           @extend %img-eyebrow;
           top: -47px;
